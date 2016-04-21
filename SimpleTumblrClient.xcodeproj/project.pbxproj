@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D16E93F61CC905FE0076C45A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E93F51CC905FE0076C45A /* main.m */; };
-		D16E93F91CC905FE0076C45A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E93F81CC905FE0076C45A /* AppDelegate.m */; };
-		D16E93FC1CC905FE0076C45A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E93FB1CC905FE0076C45A /* ViewController.m */; };
-		D16E93FF1CC905FE0076C45A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16E93FD1CC905FE0076C45A /* Main.storyboard */; };
+		D16E93F91CC905FE0076C45A /* JEDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E93F81CC905FE0076C45A /* JEDAppDelegate.m */; };
+		D16E93FC1CC905FE0076C45A /* JEDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E93FB1CC905FE0076C45A /* JEDViewController.m */; };
 		D16E94021CC905FE0076C45A /* SimpleTumblrClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D16E94001CC905FE0076C45A /* SimpleTumblrClient.xcdatamodeld */; };
 		D16E94041CC905FE0076C45A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D16E94031CC905FE0076C45A /* Assets.xcassets */; };
 		D16E94071CC905FE0076C45A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16E94051CC905FE0076C45A /* LaunchScreen.storyboard */; };
@@ -38,11 +37,10 @@
 /* Begin PBXFileReference section */
 		D16E93F11CC905FE0076C45A /* SimpleTumblrClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleTumblrClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16E93F51CC905FE0076C45A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D16E93F71CC905FE0076C45A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D16E93F81CC905FE0076C45A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D16E93FA1CC905FE0076C45A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D16E93FB1CC905FE0076C45A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D16E93FE1CC905FE0076C45A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D16E93F71CC905FE0076C45A /* JEDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JEDAppDelegate.h; sourceTree = "<group>"; };
+		D16E93F81CC905FE0076C45A /* JEDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JEDAppDelegate.m; sourceTree = "<group>"; };
+		D16E93FA1CC905FE0076C45A /* JEDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JEDViewController.h; sourceTree = "<group>"; };
+		D16E93FB1CC905FE0076C45A /* JEDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JEDViewController.m; sourceTree = "<group>"; };
 		D16E94011CC905FE0076C45A /* SimpleTumblrClient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleTumblrClient.xcdatamodel; sourceTree = "<group>"; };
 		D16E94031CC905FE0076C45A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D16E94061CC905FE0076C45A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,11 +101,10 @@
 		D16E93F31CC905FE0076C45A /* SimpleTumblrClient */ = {
 			isa = PBXGroup;
 			children = (
-				D16E93F71CC905FE0076C45A /* AppDelegate.h */,
-				D16E93F81CC905FE0076C45A /* AppDelegate.m */,
-				D16E93FA1CC905FE0076C45A /* ViewController.h */,
-				D16E93FB1CC905FE0076C45A /* ViewController.m */,
-				D16E93FD1CC905FE0076C45A /* Main.storyboard */,
+				D16E93F71CC905FE0076C45A /* JEDAppDelegate.h */,
+				D16E93F81CC905FE0076C45A /* JEDAppDelegate.m */,
+				D16E93FA1CC905FE0076C45A /* JEDViewController.h */,
+				D16E93FB1CC905FE0076C45A /* JEDViewController.m */,
 				D16E94031CC905FE0076C45A /* Assets.xcassets */,
 				D16E94051CC905FE0076C45A /* LaunchScreen.storyboard */,
 				D16E94081CC905FE0076C45A /* Info.plist */,
@@ -205,6 +202,7 @@
 		D16E93E91CC905FE0076C45A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = JED;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Justyna Dolińska";
 				TargetAttributes = {
@@ -248,7 +246,6 @@
 			files = (
 				D16E94071CC905FE0076C45A /* LaunchScreen.storyboard in Resources */,
 				D16E94041CC905FE0076C45A /* Assets.xcassets in Resources */,
-				D16E93FF1CC905FE0076C45A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,8 +270,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16E93FC1CC905FE0076C45A /* ViewController.m in Sources */,
-				D16E93F91CC905FE0076C45A /* AppDelegate.m in Sources */,
+				D16E93FC1CC905FE0076C45A /* JEDViewController.m in Sources */,
+				D16E93F91CC905FE0076C45A /* JEDAppDelegate.m in Sources */,
 				D16E94021CC905FE0076C45A /* SimpleTumblrClient.xcdatamodeld in Sources */,
 				D16E93F61CC905FE0076C45A /* main.m in Sources */,
 			);
@@ -312,14 +309,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D16E93FD1CC905FE0076C45A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D16E93FE1CC905FE0076C45A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D16E94051CC905FE0076C45A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

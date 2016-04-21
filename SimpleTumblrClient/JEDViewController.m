@@ -6,17 +6,23 @@
 //  Copyright © 2016 Justyna Dolińska. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "JEDViewController.h"
 
-@interface ViewController ()
+@interface JEDViewController ()
 
 @end
 
-@implementation ViewController
+@implementation JEDViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UILabel *helloLabel = [UILabel new];
+    helloLabel.text = @"Hello world!";
+    [helloLabel sizeToFit];
+    helloLabel.center = self.view.center;
+    helloLabel.textColor = [UIColor blueColor];
+    [self.view addSubview:helloLabel];
 }
 
 - (void)didReceiveMemoryWarning {

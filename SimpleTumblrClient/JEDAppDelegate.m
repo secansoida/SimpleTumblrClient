@@ -6,17 +6,24 @@
 //  Copyright © 2016 Justyna Dolińska. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "JEDAppDelegate.h"
+#import "JEDViewController.h"
 
-@interface AppDelegate ()
+@interface JEDAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation JEDAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    JEDViewController *mainVC = [JEDViewController new];
+//    mainVC.view.frame = self.window.bounds;
+    self.window = [UIWindow new];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    self.window.rootViewController = mainVC;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
