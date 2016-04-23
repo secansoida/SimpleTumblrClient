@@ -1,5 +1,5 @@
 //
-//  AppDelegate.m
+//  JEDAppDelegate.m
 //  SimpleTumblrClient
 //
 //  Created by Justyna Dolińska on 21/04/16.
@@ -16,10 +16,9 @@
 @implementation JEDAppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     JEDViewController *mainVC = [JEDViewController new];
-//    mainVC.view.frame = self.window.bounds;
     self.window = [UIWindow new];
     self.window.frame = [UIScreen mainScreen].bounds;
     self.window.rootViewController = mainVC;

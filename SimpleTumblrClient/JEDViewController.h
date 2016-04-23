@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  JEDViewController.h
 //  SimpleTumblrClient
 //
 //  Created by Justyna Dolińska on 21/04/16.

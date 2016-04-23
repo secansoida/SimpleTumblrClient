@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  JEDAppDelegate.h
 //  SimpleTumblrClient
 //
 //  Created by Justyna Dolińska on 21/04/16.

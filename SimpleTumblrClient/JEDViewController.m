@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  JEDViewController.m
 //  SimpleTumblrClient
 //
 //  Created by Justyna Dolińska on 21/04/16.
@@ -16,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     UILabel *helloLabel = [UILabel new];
     helloLabel.text = @"Hello world!";
     [helloLabel sizeToFit];
