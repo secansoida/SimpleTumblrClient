@@ -18,6 +18,7 @@
 		D16E941D1CC905FE0076C45A /* SimpleTumblrClientUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E941C1CC905FE0076C45A /* SimpleTumblrClientUITests.m */; };
 		D16E942C1CCBBC820076C45A /* JEDPost.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E942B1CCBBC820076C45A /* JEDPost.m */; };
 		D16E942F1CCBC0FD0076C45A /* JEDFeedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E942E1CCBC0FD0076C45A /* JEDFeedResponse.m */; };
+		D16E94321CCE603B0076C45A /* JEDPhotoPost.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E94311CCE603B0076C45A /* JEDPhotoPost.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		D16E942B1CCBBC820076C45A /* JEDPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEDPost.m; sourceTree = "<group>"; };
 		D16E942D1CCBC0FD0076C45A /* JEDFeedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEDFeedResponse.h; sourceTree = "<group>"; };
 		D16E942E1CCBC0FD0076C45A /* JEDFeedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEDFeedResponse.m; sourceTree = "<group>"; };
+		D16E94301CCE603B0076C45A /* JEDPhotoPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEDPhotoPost.h; sourceTree = "<group>"; };
+		D16E94311CCE603B0076C45A /* JEDPhotoPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEDPhotoPost.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				D16E93FB1CC905FE0076C45A /* JEDViewController.m */,
 				D16E942A1CCBBC820076C45A /* JEDPost.h */,
 				D16E942B1CCBBC820076C45A /* JEDPost.m */,
+				D16E94301CCE603B0076C45A /* JEDPhotoPost.h */,
+				D16E94311CCE603B0076C45A /* JEDPhotoPost.m */,
 				D16E942D1CCBC0FD0076C45A /* JEDFeedResponse.h */,
 				D16E942E1CCBC0FD0076C45A /* JEDFeedResponse.m */,
 				D16E94031CC905FE0076C45A /* Assets.xcassets */,
@@ -358,6 +363,7 @@
 				D16E942F1CCBC0FD0076C45A /* JEDFeedResponse.m in Sources */,
 				D16E93FC1CC905FE0076C45A /* JEDViewController.m in Sources */,
 				D16E93F91CC905FE0076C45A /* JEDAppDelegate.m in Sources */,
+				D16E94321CCE603B0076C45A /* JEDPhotoPost.m in Sources */,
 				D16E942C1CCBBC820076C45A /* JEDPost.m in Sources */,
 				D16E94021CC905FE0076C45A /* SimpleTumblrClient.xcdatamodeld in Sources */,
 				D16E93F61CC905FE0076C45A /* main.m in Sources */,

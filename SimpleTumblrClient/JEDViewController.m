@@ -28,7 +28,7 @@
 
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    NSURL *url = [NSURL URLWithString:@"https://ravensrepository.tumblr.com/api/read/json"];
+    NSURL *url = [NSURL URLWithString:@"https://pixeloutput.tumblr.com/api/read/json"];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
 
     void (^completion)(NSData *, NSURLResponse *, NSError *) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
