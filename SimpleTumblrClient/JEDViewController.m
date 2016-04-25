@@ -7,11 +7,13 @@
 //
 
 #import "JEDViewController.h"
-#import "JEDFeedResponse.h"
-#import "MTLJSONAdapter.h"
+#import "JEDFeedFetcher.h"
+
 @import JavaScriptCore;
 
 @interface JEDViewController ()
+
+@property (nonatomic, strong) JEDFeedFetcher *feedFetcher;
 
 @end
 
@@ -19,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     UILabel *helloLabel = [UILabel new];
     helloLabel.text = @"Hello world!";
     helloLabel.frame = self.view.bounds;
@@ -28,36 +31,24 @@
 
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    NSURL *url = [NSURL URLWithString:@"https://pixeloutput.tumblr.com/api/read/json"];
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
 
-    void (^completion)(NSData *, NSURLResponse *, NSError *) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSString *text;
-        if (data) {
-            text = [[NSString alloc] initWithData:data encoding:4];
-            JSContext *context = [JSContext new];
-            [context evaluateScript:text];
-            NSDictionary *dict = [context[@"tumblr_api_read"] toDictionary];
-            JEDFeedResponse *resp = [MTLJSONAdapter modelOfClass:[JEDFeedResponse class]
-                                              fromJSONDictionary:dict
-                                                           error:nil];
-            NSLog(@"%@", resp.posts);
+    self.feedFetcher = [[JEDFeedFetcher alloc] initWithSession:session];
+
+    NSString *username = @"pixeloutput";
+
+    [self.feedFetcher fetchFeedForUsername:username withCompletion:^(JEDFeedResponse *response, NSError *error) {
+        if (response) {
+            NSLog(@"%@", response);
         } else {
-            text = [NSString stringWithFormat:@"%@", error];
+            NSLog(@"%@", error);
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            helloLabel.text = text;
-        });
-    };
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url
-                                            completionHandler:completion];
-    [dataTask resume];
+    }];
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

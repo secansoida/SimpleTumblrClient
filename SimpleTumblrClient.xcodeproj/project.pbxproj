@@ -19,6 +19,7 @@
 		D16E942C1CCBBC820076C45A /* JEDPost.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E942B1CCBBC820076C45A /* JEDPost.m */; };
 		D16E942F1CCBC0FD0076C45A /* JEDFeedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E942E1CCBC0FD0076C45A /* JEDFeedResponse.m */; };
 		D16E94321CCE603B0076C45A /* JEDPhotoPost.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E94311CCE603B0076C45A /* JEDPhotoPost.m */; };
+		D16E94361CCE6EE80076C45A /* JEDFeedFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E94351CCE6EE80076C45A /* JEDFeedFetcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		D16E942E1CCBC0FD0076C45A /* JEDFeedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEDFeedResponse.m; sourceTree = "<group>"; };
 		D16E94301CCE603B0076C45A /* JEDPhotoPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEDPhotoPost.h; sourceTree = "<group>"; };
 		D16E94311CCE603B0076C45A /* JEDPhotoPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEDPhotoPost.m; sourceTree = "<group>"; };
+		D16E94341CCE6EE80076C45A /* JEDFeedFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEDFeedFetcher.h; sourceTree = "<group>"; };
+		D16E94351CCE6EE80076C45A /* JEDFeedFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEDFeedFetcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,12 +141,7 @@
 				D16E93F81CC905FE0076C45A /* JEDAppDelegate.m */,
 				D16E93FA1CC905FE0076C45A /* JEDViewController.h */,
 				D16E93FB1CC905FE0076C45A /* JEDViewController.m */,
-				D16E942A1CCBBC820076C45A /* JEDPost.h */,
-				D16E942B1CCBBC820076C45A /* JEDPost.m */,
-				D16E94301CCE603B0076C45A /* JEDPhotoPost.h */,
-				D16E94311CCE603B0076C45A /* JEDPhotoPost.m */,
-				D16E942D1CCBC0FD0076C45A /* JEDFeedResponse.h */,
-				D16E942E1CCBC0FD0076C45A /* JEDFeedResponse.m */,
+				D16E94331CCE6E5D0076C45A /* Fetching */,
 				D16E94031CC905FE0076C45A /* Assets.xcassets */,
 				D16E94051CC905FE0076C45A /* LaunchScreen.storyboard */,
 				D16E94081CC905FE0076C45A /* Info.plist */,
@@ -177,6 +175,21 @@
 				D16E941E1CC905FE0076C45A /* Info.plist */,
 			);
 			path = SimpleTumblrClientUITests;
+			sourceTree = "<group>";
+		};
+		D16E94331CCE6E5D0076C45A /* Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				D16E942A1CCBBC820076C45A /* JEDPost.h */,
+				D16E942B1CCBBC820076C45A /* JEDPost.m */,
+				D16E94301CCE603B0076C45A /* JEDPhotoPost.h */,
+				D16E94311CCE603B0076C45A /* JEDPhotoPost.m */,
+				D16E942D1CCBC0FD0076C45A /* JEDFeedResponse.h */,
+				D16E942E1CCBC0FD0076C45A /* JEDFeedResponse.m */,
+				D16E94341CCE6EE80076C45A /* JEDFeedFetcher.h */,
+				D16E94351CCE6EE80076C45A /* JEDFeedFetcher.m */,
+			);
+			name = Fetching;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +376,7 @@
 				D16E942F1CCBC0FD0076C45A /* JEDFeedResponse.m in Sources */,
 				D16E93FC1CC905FE0076C45A /* JEDViewController.m in Sources */,
 				D16E93F91CC905FE0076C45A /* JEDAppDelegate.m in Sources */,
+				D16E94361CCE6EE80076C45A /* JEDFeedFetcher.m in Sources */,
 				D16E94321CCE603B0076C45A /* JEDPhotoPost.m in Sources */,
 				D16E942C1CCBBC820076C45A /* JEDPost.m in Sources */,
 				D16E94021CC905FE0076C45A /* SimpleTumblrClient.xcdatamodeld in Sources */,
