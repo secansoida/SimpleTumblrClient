@@ -25,6 +25,7 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) JEDFeedResponse *currentResponse;
+@property (nonatomic, strong) NSMutableDictionary *simpleImageCache;
 
 @end
 
@@ -32,6 +33,8 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.simpleImageCache = [NSMutableDictionary new];
 
     [self setupSearchBar];
 
@@ -99,19 +102,12 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
     return UIStatusBarStyleLightContent;
 }
 
-- (void)showFeedForUsername:(NSString *)username
+- (void)didReceiveMemoryWarning
 {
-    [self.feedFetcher fetchFeedForUsername:username withCompletion:^(JEDFeedResponse *response, NSError *error) {
-        if (response) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.currentResponse = response;
-                [self.tableView reloadData];
-            });
-        } else {
-            NSLog(@"%@", error);
-        }
-    }];
+    [super didReceiveMemoryWarning];
+    [self.simpleImageCache removeAllObjects];
 }
+
 
 #pragma mark - UISearchBarDelegate
 
@@ -119,6 +115,7 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
 {
     [self showFeedForUsername:searchBar.text];
 }
+
 
 #pragma mark - UITableViewDataSource
 
@@ -178,13 +175,32 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
 - (void)setupCellAtIndexPath:(NSIndexPath *)indexPath withPhotoPost:(JEDPhotoPost *)photoPost
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:photoPost.fullSizeURL];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
+        UIImage *image = self.simpleImageCache[photoPost.fullSizeURL];
+        if (!image) {
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:photoPost.fullSizeURL];
+            image = [[UIImage alloc] initWithData:imageData];
+            self.simpleImageCache[photoPost.fullSizeURL] = image;
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             JEDPhotoTableViewCell *photoCell = [self.tableView cellForRowAtIndexPath:indexPath];
             [photoCell setupWithImage:image];
         });
     });
+}
+
+
+- (void)showFeedForUsername:(NSString *)username
+{
+    [self.feedFetcher fetchFeedForUsername:username withCompletion:^(JEDFeedResponse *response, NSError *error) {
+        if (response) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.currentResponse = response;
+                [self.tableView reloadData];
+            });
+        } else {
+            NSLog(@"%@", error);
+        }
+    }];
 }
 
 @end
