@@ -19,7 +19,7 @@ static NSString * const kDefaultCellReuseIdentifier = @"Cell";
 static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
 
 
-@interface JEDViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface JEDViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) JEDFeedFetcher *feedFetcher;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -52,6 +52,10 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
 
     NSString *username = @"pixeloutput";
 
+    self.searchBar.text = username;
+
+    ((UITextField *)self.searchBar.subviews[0].subviews[1]).backgroundColor = [UIColor blackColor];
+
     [self showFeedForUsername:username];
     
 }
@@ -62,7 +66,7 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
     [searchBarAppearance setBarTintColor:[UIColor whiteColor]];
     [searchBarAppearance setTintColor:[UIColor greenColor]];
     UITextField *textFieldAppearance = [UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]];
-    UIFont *font = [UIFont fontWithName:@"Courier New" size:14] ?: [UIFont systemFontOfSize:14];
+    UIFont *font = [UIFont fontWithName:@"Courier New" size:14];
     [textFieldAppearance setDefaultTextAttributes:@{
                                                     NSFontAttributeName : font,
                                                     NSForegroundColorAttributeName : [UIColor greenColor],
@@ -127,8 +131,7 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
         {
             JEDPhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPhotoCellReuseIdentifier
                                                                           forIndexPath:indexPath];
-            [cell reset];
-            [self setupCellAtIndexPath:indexPath withPhotoPost:(JEDPhotoPost *)post];
+            [self setupCell:cell atIndexPath:indexPath withPhotoPost:(JEDPhotoPost *)post];
             return cell;
         }
             break;
@@ -151,6 +154,7 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
     return 0;
 }
 
+
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -161,26 +165,40 @@ static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
         {
             JEDPhotoPost *photoPost = (JEDPhotoPost *)post;
             return [JEDPhotoTableViewCell heightForCellWidth:CGRectGetWidth(tableView.bounds)
-                                                   imageSize:CGSizeMake([photoPost.width doubleValue], [photoPost.height doubleValue])];
+                                                   imageSize:CGSizeMake([photoPost.width doubleValue], [photoPost.height doubleValue])
+                                                     caption:photoPost.caption];
         }
             break;
         default:
-            return 20;
+            return 40;
             break;
     }
 }
 
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.searchBar resignFirstResponder];
+}
+
+
 #pragma mark - Private
 
-- (void)setupCellAtIndexPath:(NSIndexPath *)indexPath withPhotoPost:(JEDPhotoPost *)photoPost
+- (void)setupCell:(JEDPhotoTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath withPhotoPost:(JEDPhotoPost *)photoPost
 {
+    [cell reset];
+    [cell setupWithCaption:photoPost.caption];
+    UIImage *image = self.simpleImageCache[photoPost.fullSizeURL];
+    if (image) {
+        [cell setupWithImage:image];
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = self.simpleImageCache[photoPost.fullSizeURL];
-        if (!image) {
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:photoPost.fullSizeURL];
-            image = [[UIImage alloc] initWithData:imageData];
-            self.simpleImageCache[photoPost.fullSizeURL] = image;
-        }
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:photoPost.fullSizeURL];
+        UIImage *image = [[UIImage alloc] initWithData:imageData];
+        self.simpleImageCache[photoPost.fullSizeURL] = image;
         dispatch_async(dispatch_get_main_queue(), ^{
             JEDPhotoTableViewCell *photoCell = [self.tableView cellForRowAtIndexPath:indexPath];
             [photoCell setupWithImage:image];

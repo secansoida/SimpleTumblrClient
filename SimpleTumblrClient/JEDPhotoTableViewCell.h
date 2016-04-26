@@ -12,6 +12,7 @@
 
 - (void)reset;
 - (void)setupWithImage:(UIImage *)image;
-+ (CGFloat)heightForCellWidth:(CGFloat)cellWidth imageSize:(CGSize)imageSize;
+- (void)setupWithCaption:(NSString *)caption;
++ (CGFloat)heightForCellWidth:(CGFloat)cellWidth imageSize:(CGSize)imageSize caption:(NSString *)caption;
 
 @end
