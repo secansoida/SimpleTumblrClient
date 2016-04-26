@@ -9,10 +9,17 @@
 #import "JEDViewController.h"
 #import "JEDFeedFetcher.h"
 #import "JEDPost.h"
+#import "JEDPhotoTableViewCell.h"
+#import "JEDPhotoPost.h"
 
 @import JavaScriptCore;
 
-@interface JEDViewController () <UISearchBarDelegate, UITableViewDataSource>
+
+static NSString * const kDefaultCellReuseIdentifier = @"Cell";
+static NSString * const kPhotoCellReuseIdentifier = @"PhotoCell";
+
+
+@interface JEDViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) JEDFeedFetcher *feedFetcher;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -29,6 +36,11 @@
     [self setupSearchBar];
 
     [self setupTableView];
+
+    [self.tableView registerClass:[JEDPhotoTableViewCell class]
+           forCellReuseIdentifier:kPhotoCellReuseIdentifier];
+    [self.tableView registerClass:[UITableViewCell class]
+           forCellReuseIdentifier:kDefaultCellReuseIdentifier];
 
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -78,6 +90,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor blackColor];
     self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
 }
 
@@ -111,13 +124,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    }
     JEDPost *post = self.currentResponse.posts[indexPath.row];
-    cell.textLabel.text = [[NSDate dateWithTimeIntervalSince1970:[post.timestamp doubleValue]] description];
-    return cell;
+    switch (post.type) {
+        case JEDPostTypePhoto:
+        {
+            JEDPhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPhotoCellReuseIdentifier
+                                                                          forIndexPath:indexPath];
+            [cell reset];
+            [self setupCellAtIndexPath:indexPath withPhotoPost:(JEDPhotoPost *)post];
+            return cell;
+        }
+            break;
+        default:
+        {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDefaultCellReuseIdentifier
+                                                                    forIndexPath:indexPath];
+            cell.textLabel.text = [[NSDate dateWithTimeIntervalSince1970:[post.timestamp doubleValue]] description];
+            return cell;
+        }
+            break;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -126,6 +152,39 @@
         return self.currentResponse.posts.count;
     }
     return 0;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    JEDPost *post = self.currentResponse.posts[indexPath.row];
+    switch (post.type) {
+        case JEDPostTypePhoto:
+        {
+            JEDPhotoPost *photoPost = (JEDPhotoPost *)post;
+            return [JEDPhotoTableViewCell heightForCellWidth:CGRectGetWidth(tableView.bounds)
+                                                   imageSize:CGSizeMake([photoPost.width doubleValue], [photoPost.height doubleValue])];
+        }
+            break;
+        default:
+            return 20;
+            break;
+    }
+}
+
+#pragma mark - Private
+
+- (void)setupCellAtIndexPath:(NSIndexPath *)indexPath withPhotoPost:(JEDPhotoPost *)photoPost
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:photoPost.fullSizeURL];
+        UIImage *image = [[UIImage alloc] initWithData:imageData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            JEDPhotoTableViewCell *photoCell = [self.tableView cellForRowAtIndexPath:indexPath];
+            [photoCell setupWithImage:image];
+        });
+    });
 }
 
 @end
